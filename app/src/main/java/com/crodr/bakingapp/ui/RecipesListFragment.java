@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.crodr.bakingapp.R;
 import com.crodr.bakingapp.model.Recipe;
@@ -28,16 +27,16 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RecipesFragment#newInstance} factory method to
+ * Use the {@link RecipesListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RecipesFragment extends Fragment {
+public class RecipesListFragment extends Fragment {
     @BindView(R.id.recipes_list)
     RecyclerView recipesList;
 
     RecipesAdapter adapter;
 
-    public RecipesFragment() {
+    public RecipesListFragment() {
         // Required empty public constructor
     }
 
@@ -45,10 +44,10 @@ public class RecipesFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment RecipesFragment.
+     * @return A new instance of fragment RecipesListFragment.
      */
-    public static RecipesFragment newInstance() {
-        return new RecipesFragment();
+    public static RecipesListFragment newInstance() {
+        return new RecipesListFragment();
     }
 
     @Override
@@ -69,7 +68,7 @@ public class RecipesFragment extends Fragment {
             @Override
             public void onClick(Recipe recipe) {
                 Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                //intent.putExtra(DetailsActivity.ARG_RECIPE, recipe);
+                intent.putExtra(DetailsActivity.ARG_RECIPE, recipe);
                 startActivity(intent);
             }
         });
@@ -89,7 +88,7 @@ public class RecipesFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Log.d("RecipesFragment", "ERROR ***********");
+                Log.d("RecipesListFragment", "ERROR ***********");
             }
         });
     }

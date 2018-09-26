@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeViewHolder> {
-    private List<Recipe> recipesList = new ArrayList<>();
+    private List<Recipe> recipesList;
     private RecipeClickListener listener;
 
     public RecipesAdapter(RecipeClickListener listener) {
@@ -51,7 +51,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeVi
         @BindView(R.id.txt_recipe_name)
         TextView txtRecipe;
 
-        public RecipeViewHolder(View itemView) {
+        RecipeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

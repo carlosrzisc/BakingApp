@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.mainScreenFrame, RecipesFragment.newInstance()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.mainScreenFrame, RecipesListFragment.newInstance()).commit();
         }
     }
 }
