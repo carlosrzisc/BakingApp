@@ -1,7 +1,9 @@
 package com.crodr.bakingapp.ui;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,8 @@ import com.crodr.bakingapp.model.Recipe;
 import com.crodr.bakingapp.model.Step;
 import com.crodr.bakingapp.ui.adapters.IngredientsAdapter;
 import com.crodr.bakingapp.ui.adapters.StepsAdapter;
+import com.crodr.bakingapp.widget.RecipeWidgetProvider;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +34,7 @@ import butterknife.ButterKnife;
  */
 public class RecipeFragment extends Fragment {
     private static final String ARG_PARAM_RECIPE = "param_step";
+    public static final String JSON_RECIPE = "json_ingredients";
     private Recipe paramRecipe;
     private OnStepSelectedListener mListener;
 
@@ -85,7 +90,28 @@ public class RecipeFragment extends Fragment {
             }
         }));
 
+        if (paramRecipe!= null) {
+            updateRecipeWidget(paramRecipe);
+        }
         return rootView;
+    }
+
+    private void updateRecipeWidget(Recipe recipe) {
+        storeInSharedPreferences(recipe);
+        Intent updateWidget = new Intent(getActivity(), RecipeWidgetProvider.class);
+        updateWidget.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        if (getActivity() != null) {
+            getActivity().sendBroadcast(updateWidget);
+        }
+    }
+
+    private void storeInSharedPreferences(Recipe recipe) {
+        String jsonRecipe = new Gson().toJson(recipe);
+        if (getActivity() != null) {
+            SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.preference_baking_key), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(JSON_RECIPE, jsonRecipe).apply();
+        }
     }
 
     @Override

@@ -7,4 +7,6 @@
     <string name="label_ingredients">Ingredients</string>
     <string name="label_steps">Steps</string>
     <string name="txt_see_step_details">See step details</string>
+    <string name="preference_baking_key">pref_baking_app</string>
+    <string name="widget_title">Baking App</string>
 </resources>
