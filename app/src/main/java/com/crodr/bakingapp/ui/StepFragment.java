@@ -4,11 +4,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -108,8 +106,6 @@ public class StepFragment extends Fragment {
         }
         if (!paramStep.getVideoURL().isEmpty()) {
             initVideoPlayer(Uri.parse(paramStep.getVideoURL()));
-        } else {
-            playerView.setVisibility(View.GONE);
         }
         return rootView;
     }
@@ -151,7 +147,7 @@ public class StepFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (Util.SDK_INT <= 23 || exoPlayer == null) {
+        if (Util.SDK_INT <= 23 || exoPlayer == null && paramStep != null && !paramStep.getVideoURL().isEmpty()) {
             initVideoPlayer(Uri.parse(paramStep.getVideoURL()));
         }
     }

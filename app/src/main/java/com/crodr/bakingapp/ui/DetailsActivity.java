@@ -1,6 +1,7 @@
 package com.crodr.bakingapp.ui;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.FrameLayout;
@@ -11,12 +12,14 @@ import com.crodr.bakingapp.model.Step;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Optional;
 
 public class DetailsActivity extends AppCompatActivity implements RecipeFragment.OnStepSelectedListener {
 
     @BindView(R.id.container_fragment_ingredients)
     FrameLayout containerIngredients;
 
+    @Nullable
     @BindView(R.id.container_fragment_step)
     FrameLayout containerStep;
 
@@ -33,7 +36,7 @@ public class DetailsActivity extends AppCompatActivity implements RecipeFragment
 
         if (savedInstanceState == null) {
             Recipe recipe = getIntent().getParcelableExtra(ARG_RECIPE);
-            getSupportFragmentManager().beginTransaction().add(
+            getSupportFragmentManager().beginTransaction().replace(
                     R.id.container_fragment_ingredients, RecipeFragment.newInstance(recipe), "recipe_fragment")
                     .commit();
             if (containerStep != null) {

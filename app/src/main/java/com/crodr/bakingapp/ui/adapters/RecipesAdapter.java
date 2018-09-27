@@ -51,6 +51,9 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeVi
         @BindView(R.id.txt_recipe_name)
         TextView txtRecipe;
 
+        @BindView(R.id.txt_recipe_info)
+        TextView txtRecipeInfo;
+
         RecipeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -58,6 +61,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeVi
 
         void bind(final Recipe recipe, final RecipeClickListener listener) {
             txtRecipe.setText(recipe.getName());
+            String recipeInfo = "Servings: " + recipe.getServings() +
+                                " Ingredients: "  + recipe.getIngredients().size() +
+                                " Steps: " + recipe.getSteps().size();
+            txtRecipeInfo.setText(recipeInfo);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

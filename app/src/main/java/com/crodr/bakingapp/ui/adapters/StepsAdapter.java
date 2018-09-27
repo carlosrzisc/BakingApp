@@ -52,7 +52,8 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHold
         }
 
         void bind(final Step step, final StepClickListener listener) {
-            txtStep.setText(step.getShortDescription());
+            String stepDetails = step.getId() + " - " + step.getShortDescription();
+            txtStep.setText(stepDetails);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

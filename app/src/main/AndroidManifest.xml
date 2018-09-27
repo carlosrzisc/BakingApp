@@ -20,10 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.DetailsActivity" />
-        <activity
-            android:name=".ui.StepActivity"
-            android:label="@string/title_activity_step"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.StepActivity"/>
     </application>
 
 </manifest>
