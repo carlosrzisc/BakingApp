@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.crodr.bakingapp.R;
@@ -31,23 +32,13 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
 
-                /////////
-                /////////
                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_recipe);
                 views.setTextViewText(R.id.appwidget_text, recipe.getName());
 
+                Log.i("WIDGETTT", recipe.getName());
+
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
-                /////////
-                /////////
-
-
-                ///////////
-//                RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_recipe);
-//                remoteViews.setRemoteAdapter(R.id.widget_list_view);
-                ///////////
-
-
 
                 appWidgetManager.updateAppWidget(appWidgetId, views);
                 appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.recipe_ingredients);

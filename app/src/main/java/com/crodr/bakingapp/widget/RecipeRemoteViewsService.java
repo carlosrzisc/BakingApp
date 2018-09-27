@@ -3,6 +3,7 @@ package com.crodr.bakingapp.widget;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -30,16 +31,18 @@ public class RecipeRemoteViewsService extends RemoteViewsService {
         @Override
         public void onDataSetChanged() {
             SharedPreferences prefs = context.getSharedPreferences(context.getString(R.string.preference_baking_key), Context.MODE_PRIVATE);
-            String jsonIngredients = prefs.getString(RecipeFragment.JSON_RECIPE, "");
 
-            if (!jsonIngredients.isEmpty()) {
-                recipe = new Gson().fromJson(jsonIngredients, Recipe.class);
+            String jsonRecipe = prefs.getString(RecipeFragment.JSON_RECIPE, "");
+            Log.i("WIDGETTT",  jsonRecipe);
+            if (!jsonRecipe.isEmpty()) {
+                recipe = new Gson().fromJson(jsonRecipe, Recipe.class);
             }
         }
 
         @Override
         public RemoteViews getViewAt(int i) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list_item);
+            Log.i("WIDGETTT",  recipe.getIngredients().get(i).getIngredient());
             views.setTextViewText(R.id.txt_widget_item, recipe.getIngredients().get(i).getIngredient());
             return views;
         }
