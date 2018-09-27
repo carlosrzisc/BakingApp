@@ -10,6 +10,7 @@ import com.crodr.bakingapp.model.Recipe;
 import com.crodr.bakingapp.model.Step;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DetailsActivity extends AppCompatActivity implements RecipeFragment.OnStepSelectedListener {
 
@@ -28,19 +29,19 @@ public class DetailsActivity extends AppCompatActivity implements RecipeFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        if (containerStep != null) {
-            isTabletView = true;
-            if (savedInstanceState == null) {
-                showStepInFragment(null);
-            }
-        } else {
-            isTabletView = false;
-        }
+        ButterKnife.bind(this);
+
         if (savedInstanceState == null) {
             Recipe recipe = getIntent().getParcelableExtra(ARG_RECIPE);
             getSupportFragmentManager().beginTransaction().add(
-                    R.id.container_fragment_ingredients, RecipeFragment.newInstance(recipe), "step_fragment")
+                    R.id.container_fragment_ingredients, RecipeFragment.newInstance(recipe), "recipe_fragment")
                     .commit();
+            if (containerStep != null) {
+                isTabletView = true;
+                showStepInFragment(recipe.getSteps().get(0));
+            } else {
+                isTabletView = false;
+            }
         }
     }
 
