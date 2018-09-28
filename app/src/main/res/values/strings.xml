@@ -10,4 +10,5 @@
     <string name="preference_baking_key">pref_baking_app</string>
     <string name="widget_title">Baking App</string>
     <string name="txt_recipes">Recipes</string>
+    <string name="txt_step">Launch recipe step</string>
 </resources>

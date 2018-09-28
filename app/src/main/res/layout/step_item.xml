@@ -14,8 +14,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:src="@drawable/ic_chevron_right_black_24dp"
         android:tint="@color/colorPrimary"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:contentDescription="@string/txt_step" />
 
 </android.support.constraint.ConstraintLayout>

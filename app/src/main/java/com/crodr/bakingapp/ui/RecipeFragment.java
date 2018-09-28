@@ -35,6 +35,9 @@ import butterknife.ButterKnife;
 public class RecipeFragment extends Fragment {
     private static final String ARG_PARAM_RECIPE = "param_step";
     public static final String JSON_RECIPE = "json_ingredients";
+
+    public static final String PREF_RECIPE = "prefs_recipe";
+
     private Recipe paramRecipe;
     private OnStepSelectedListener mListener;
 
@@ -108,7 +111,7 @@ public class RecipeFragment extends Fragment {
     private void storeInSharedPreferences(Recipe recipe) {
         String jsonRecipe = new Gson().toJson(recipe);
         if (getActivity() != null) {
-            SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.preference_baking_key), Context.MODE_PRIVATE);
+            SharedPreferences preferences = getActivity().getSharedPreferences(PREF_RECIPE, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(JSON_RECIPE, jsonRecipe).apply();
         }

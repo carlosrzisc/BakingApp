@@ -22,8 +22,6 @@
         <activity android:name=".ui.DetailsActivity" />
         <activity android:name=".ui.StepActivity"/>
 
-        <!--<service android:name=".widget.RecipeRemoteViewsService" />-->
-
         <receiver android:name=".widget.RecipeWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -33,10 +31,9 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/recipe_widget_provider_info" />
         </receiver>
-
-        <service
-            android:name=".widget.RecipeRemoteViewsService"
+        <service android:name=".widget.RecipeRemoteViewsService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 
 </manifest>

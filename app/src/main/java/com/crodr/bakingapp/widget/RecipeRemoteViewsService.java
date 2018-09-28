@@ -3,6 +3,7 @@ package com.crodr.bakingapp.widget;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -30,10 +31,9 @@ public class RecipeRemoteViewsService extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
-            SharedPreferences prefs = context.getSharedPreferences(context.getString(R.string.preference_baking_key), Context.MODE_PRIVATE);
+            SharedPreferences prefs = context.getSharedPreferences(RecipeFragment.PREF_RECIPE, Context.MODE_PRIVATE);
 
             String jsonRecipe = prefs.getString(RecipeFragment.JSON_RECIPE, "");
-            Log.i("WIDGETTT",  jsonRecipe);
             if (!jsonRecipe.isEmpty()) {
                 recipe = new Gson().fromJson(jsonRecipe, Recipe.class);
             }
@@ -42,13 +42,14 @@ public class RecipeRemoteViewsService extends RemoteViewsService {
         @Override
         public RemoteViews getViewAt(int i) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list_item);
-            Log.i("WIDGETTT",  recipe.getIngredients().get(i).getIngredient());
             views.setTextViewText(R.id.txt_widget_item, recipe.getIngredients().get(i).getIngredient());
             return views;
         }
 
         @Override
-        public int getCount() { return recipe.getIngredients().size(); }
+        public int getCount() {
+            return recipe.getIngredients().size();
+        }
 
         @Override
         public RemoteViews getLoadingView() { return null; }
@@ -57,7 +58,7 @@ public class RecipeRemoteViewsService extends RemoteViewsService {
         public int getViewTypeCount() { return 1; }
 
         @Override
-        public long getItemId(int i) { return 0; }
+        public long getItemId(int i) { return i; }
 
         @Override
         public boolean hasStableIds() { return true; }
