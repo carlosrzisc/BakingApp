@@ -3,6 +3,7 @@ package com.crodr.bakingapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.crodr.bakingapp.BuildConfig;
 import com.crodr.bakingapp.R;
 import com.crodr.bakingapp.model.Recipe;
 import com.crodr.bakingapp.service.RecipesClient;
 import com.crodr.bakingapp.service.RecipesService;
 import com.crodr.bakingapp.ui.adapters.RecipesAdapter;
+import com.crodr.bakingapp.utils.Utils;
 
 import java.util.List;
 
@@ -73,8 +76,17 @@ public class RecipesListFragment extends Fragment {
             }
         });
         recipesList.setAdapter(adapter);
-        fetchRecipes();
+        if (BuildConfig.BASE_URL.equalsIgnoreCase("test")) {
+
+        } else if (getActivity() != null && Utils.hasInternetConnection(getActivity())) {
+            fetchRecipes();
+        }
         return rootView;
+    }
+
+    @VisibleForTesting
+    public static void fillWithMockData() {
+
     }
 
     private void fetchRecipes() {
