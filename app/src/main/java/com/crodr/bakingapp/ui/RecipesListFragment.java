@@ -76,17 +76,10 @@ public class RecipesListFragment extends Fragment {
             }
         });
         recipesList.setAdapter(adapter);
-        if (BuildConfig.BASE_URL.equalsIgnoreCase("test")) {
-
-        } else if (getActivity() != null && Utils.hasInternetConnection(getActivity())) {
+        if (getActivity() != null && Utils.hasInternetConnection(getActivity())) {
             fetchRecipes();
         }
         return rootView;
-    }
-
-    @VisibleForTesting
-    public static void fillWithMockData() {
-
     }
 
     private void fetchRecipes() {
